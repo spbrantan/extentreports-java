@@ -68,6 +68,11 @@
 			<version>7.3.0</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.projectlombok.test</groupId>
+			<artifactId>test-maven-lombok</artifactId>
+			<version>1.18.12.0</version>
+		</dependency>
 	</dependencies>
 
 	<reporting>

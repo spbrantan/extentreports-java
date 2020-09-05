@@ -85,7 +85,7 @@ public class ExtentKlovReporter extends AbstractReporter
     private final AtomicBoolean initiated = new AtomicBoolean();
 
     private String url;
-    private Boolean appendExisting = false;
+    private Boolean appendExisting = true;
 
     private NamedAttributeContextManager<Category> categoryContext;
     private NamedAttributeContextManager<Author> authorContext;
@@ -140,6 +140,24 @@ public class ExtentKlovReporter extends AbstractReporter
         this.projectName = projectName;
         this.reportName = reportName;
     }
+    
+    
+    /**
+     * Initializes the KlovReporter with project, report names and report ID
+     * 
+     * @param projectName
+     *            Name of the project
+     * @param reportName
+     *            Name of the report
+     * @param reportId
+     *            Id of the report
+     */
+    public ExtentKlovReporter(String projectName, String reportName, String reportId) {
+        this();
+        this.projectName = projectName;
+        this.reportName = reportName;
+        this.reportId = reportId;
+    }
 
     public ExtentKlovReporter(String projectName) {
         this(projectName, null);
@@ -165,6 +183,16 @@ public class ExtentKlovReporter extends AbstractReporter
         this.reportName = reportName;
     }
 
+    /**
+     * Sets the report id
+     * 
+     * @param reportId
+     *            Id of the report
+     */
+    public void setReportId(String reportId) {
+        this.reportId = reportId;
+    }
+    
     /**
      * Initialize Mongo DB connection with host and default port: 27017
      * 
@@ -374,7 +402,8 @@ public class ExtentKlovReporter extends AbstractReporter
 
     private void setupReport(String projectName) {
         String reportName = this.reportName == null || this.reportName.isEmpty()
-                ? "Build " + Calendar.getInstance().getTimeInMillis()
+                ? "Build " + Calendar.getInstance().getTimeI
+                		nMillis()
                 : this.reportName;
         this.reportName = reportName;
         Document doc = new Document("name", reportName)
